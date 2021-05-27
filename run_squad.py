@@ -33,28 +33,51 @@ flags = tf.flags
 FLAGS = flags.FLAGS
 
 ## Required parameters
+# flags.DEFINE_string(
+#     "bert_config_file", None,
+#     "The config json file corresponding to the pre-trained BERT model. "
+#     "This specifies the model architecture.")
+
 flags.DEFINE_string(
-    "bert_config_file", None,
+    "bert_config_file", "uncased_L-12_H-768_A-12/bert_config.json",
     "The config json file corresponding to the pre-trained BERT model. "
     "This specifies the model architecture.")
 
-flags.DEFINE_string("vocab_file", None,
+# flags.DEFINE_string("vocab_file", None,
+#                     "The vocabulary file that the BERT model was trained on.")
+
+flags.DEFINE_string("vocab_file", "uncased_L-12_H-768_A-12/vocab.txt",
                     "The vocabulary file that the BERT model was trained on.")
 
+# flags.DEFINE_string(
+#     "output_dir", None,
+#     "The output directory where the model checkpoints will be written.")
+
 flags.DEFINE_string(
-    "output_dir", None,
+    "output_dir", "output/squad_base",
     "The output directory where the model checkpoints will be written.")
 
 ## Other parameters
-flags.DEFINE_string("train_file", None,
+# flags.DEFINE_string("train_file", None,
+#                     "SQuAD json for training. E.g., train-v1.1.json")
+
+flags.DEFINE_string("train_file", "SQUAD_DIR/train-v1.1.json",
                     "SQuAD json for training. E.g., train-v1.1.json")
 
-flags.DEFINE_string(
-    "predict_file", None,
-    "SQuAD json for predictions. E.g., dev-v1.1.json or test-v1.1.json")
+# flags.DEFINE_string(
+#     "predict_file", None,
+#     "SQuAD json for predictions. E.g., dev-v1.1.json or test-v1.1.json")
 
 flags.DEFINE_string(
-    "init_checkpoint", None,
+    "predict_file", "SQUAD_DIR/dev-v1.1.json",
+    "SQuAD json for predictions. E.g., dev-v1.1.json or test-v1.1.json")
+
+# flags.DEFINE_string(
+#     "init_checkpoint", None,
+#     "Initial checkpoint (usually from a pre-trained BERT model).")
+
+flags.DEFINE_string(
+    "init_checkpoint", "uncased_L-12_H-768_A-12/bert_model.ckpt",
     "Initial checkpoint (usually from a pre-trained BERT model).")
 
 flags.DEFINE_bool(
@@ -78,18 +101,29 @@ flags.DEFINE_integer(
     "The maximum number of tokens for the question. Questions longer than "
     "this will be truncated to this length.")
 
-flags.DEFINE_bool("do_train", False, "Whether to run training.")
+# flags.DEFINE_bool("do_train", False, "Whether to run training.")
 
-flags.DEFINE_bool("do_predict", False, "Whether to run eval on the dev set.")
+flags.DEFINE_bool("do_train", True, "Whether to run training.")
 
-flags.DEFINE_integer("train_batch_size", 32, "Total batch size for training.")
+# flags.DEFINE_bool("do_predict", False, "Whether to run eval on the dev set.")
+
+flags.DEFINE_bool("do_predict", True, "Whether to run eval on the dev set.")
+
+# flags.DEFINE_integer("train_batch_size", 32, "Total batch size for training.")
+
+flags.DEFINE_integer("train_batch_size", 12, "Total batch size for training.")
 
 flags.DEFINE_integer("predict_batch_size", 8,
                      "Total batch size for predictions.")
 
-flags.DEFINE_float("learning_rate", 5e-5, "The initial learning rate for Adam.")
+# flags.DEFINE_float("learning_rate", 5e-5, "The initial learning rate for Adam.")
 
-flags.DEFINE_float("num_train_epochs", 3.0,
+flags.DEFINE_float("learning_rate", 3e-5, "The initial learning rate for Adam.")
+
+# flags.DEFINE_float("num_train_epochs", 3.0,
+#                    "Total number of training epochs to perform.")
+
+flags.DEFINE_float("num_train_epochs", 2.0,
                    "Total number of training epochs to perform.")
 
 flags.DEFINE_float(
